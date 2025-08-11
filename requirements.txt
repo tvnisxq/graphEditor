@@ -1,4 +1,1 @@
-networkx
-tkinter
-matplotlib
-jupyter
+
