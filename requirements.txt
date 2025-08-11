@@ -1,0 +1,4 @@
+networkx
+tkinter
+matplotlib
+jupyter
