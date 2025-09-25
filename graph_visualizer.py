@@ -24,8 +24,31 @@ class GraphVisualizer:
         nx.draw(
             self.graph, self.pos, ax=self.ax,
             with_labels=True,
-            node_color=["green" if n in self.visited_nodes else "skyblue" for n in self.grpah.nodes],
+            node_color=["green" if n in self.visited_nodes else "skyblue" for n in self.graph.nodes],
             edge_color="black"
         )
         self.canvas.draw()
         
+    
+    def animate_traversal(self, algo, start_node=0):
+        if algo == "BFS":
+            generator = alg.bfs(self.graph, start_node)
+        elif algo == "DFS":
+            generator = alg.dfs(self.graph, start_node)
+        else:
+            return
+    
+        def step():
+            try:
+                self.visited_nodes = next(generator)
+                self.draw()
+                self.root.after(1000, step) # Update every 1 second
+            except StopIteration:
+                pass
+        step()
+
+    
+
+    def reset(self):
+        self.visited_nodes = []
+        self.draw()
