@@ -8,7 +8,7 @@ def bfs(graph, start):
         node = queue.popleft()
         if node not in visited:
             visited.append(node)
-            queue.extend(n for n in graph.neighbours(node) if n not in visited)
+            queue.extend(n for n in graph.neighbors(node) if n not in visited)
 
             yield visited[:] # yield a snapshot after each visit
 
@@ -20,6 +20,6 @@ def dfs(graph, start, visited=None):
     visited.append(start)
     yield visited[:]
 
-    for neighbour in graph.neighbours(start):
+    for neighbour in graph.neighbors(start):
         if neighbour not in visited:
             yield from dfs(graph, neighbour, visited)
