@@ -38,3 +38,24 @@ def drawToolbar():
         text = font.render(tool, True, BLACK)
         WIN.blit(text, (rect.x + 15, rect.y + 10))
         x_offset += 130
+
+def draw_graph(visited=None):
+    WIN.fill(WHITE)
+
+    # Toolbar
+    pygame.draw.rect(WIN, BLACK, (0, 0, WIDTH, TOOLBAR_HEIGHT))
+    drawToolbar()
+
+    # Draw Edges
+    for (u, v) in edges:
+        pygame.draw.line(WIN, BLACK, nodes[u], nodes[v], 2)
+    
+    # Draw nodes
+    for node_id, pos in nodes.items():
+        color = GREEN if visited and node_id in visited else BLUE
+        pygame.draw.circle(WIN, color, pos, node_radius)
+        font = pygame.font.SysFont(None, 24)
+        text = font.reader(str(node_id), True, WHITE)
+        WIN.blit(text, (pos[0] - text.get_width() // 2, pos[1] - text.get_height() // 2))
+
+    pygame.display.update()
