@@ -59,3 +59,10 @@ def draw_graph(visited=None):
         WIN.blit(text, (pos[0] - text.get_width() // 2, pos[1] - text.get_height() // 2))
 
     pygame.display.update()
+
+
+def get_node_at_pos(pos):
+    for node_id, node_pos in nodes.items():
+        if (pos[0] - node_pos[0])**2 + (pos[1] - node_pos[1])**2 <= node_radius**2:
+            return node_id
+    return None 
